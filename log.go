@@ -3,10 +3,10 @@ package neutrino
 import (
 	"github.com/gcash/bchd/addrmgr"
 	"github.com/gcash/bchd/blockchain"
+	"github.com/gcash/bchd/connmgr"
 	"github.com/gcash/bchd/peer"
 	"github.com/gcash/bchd/txscript"
 	"github.com/gcash/bchlog"
-
 	"github.com/gcash/neutrino/blockntfns"
 	"github.com/gcash/neutrino/pushtx"
 )
@@ -38,6 +38,7 @@ func UseLogger(logger bchlog.Logger) {
 	addrmgr.UseLogger(logger)
 	blockntfns.UseLogger(logger)
 	pushtx.UseLogger(logger)
+	connmgr.UseLogger(logger)
 }
 
 // logClosure is used to provide a closure over expensive logging operations so
