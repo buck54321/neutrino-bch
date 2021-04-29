@@ -4,10 +4,11 @@ package neutrino
 
 import (
 	"fmt"
-	"github.com/davecgh/go-spew/spew"
 	"sync"
 	"sync/atomic"
 	"time"
+
+	"github.com/davecgh/go-spew/spew"
 
 	"github.com/gcash/bchd/blockchain"
 	"github.com/gcash/bchd/chaincfg/chainhash"
@@ -1425,15 +1426,8 @@ func (s *ChainService) sendTransaction(tx *wire.MsgTx, options ...QueryOption) e
 				rejections[*broadcastErr]++
 			}
 		},
-		// Default to 500ms timeout. Default for queryAllPeers is a
-		// single try.
-		//
-		// TODO(wilmer): Is this timeout long enough assuming a
-		// worst-case round trip? Also needs to take into account that
-		// the other peer must query its own state to determine whether
-		// it should accept the transaction.
 		append(
-			[]QueryOption{Timeout(time.Millisecond * 500)},
+			[]QueryOption{Timeout(s.broadcastTimeout)},
 			options...,
 		)...,
 	)
