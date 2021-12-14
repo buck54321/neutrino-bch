@@ -904,8 +904,9 @@ func (s *ChainService) BestBlock() (*waddrmgr.BlockStamp, error) {
 	}
 
 	return &waddrmgr.BlockStamp{
-		Height: int32(bestHeight),
-		Hash:   bestHeader.BlockHash(),
+		Height:    int32(bestHeight),
+		Hash:      bestHeader.BlockHash(),
+		Timestamp: bestHeader.Timestamp,
 	}, nil
 }
 
